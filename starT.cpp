@@ -127,5 +127,6 @@ int main(int argc, char *argv[])
 
   // TODO: Add code that calls the starT function and prints
   // the result on cout (without an extra newline)
+  cout << starT(width, height);
   return 0;
 }
