@@ -1,4 +1,8 @@
-// starT.cpp   A demonstration of ASCII Art printing T characters
+// Michael Glushchenko and Josh Higashi starT.cpp
+// modified 1.26.19
+// The program takes an input of a width and a height, and uses
+// stars to print the letter T with (width) stars across and
+// (height) stars down from the middle star of the top row
 
 #include <iostream>
 #include <cstdlib>
@@ -11,10 +15,36 @@ void runTests(void);
 
 // Write starT per specifictions in the lab writeup
 
-string starT(int width, int height)
-{
+string starT(int width, int height) {
   string result = "";
-  result = "stub"; // TODO: remove this line, replace with correct code
+  int verticalLinePlace; //which star in top row indicates the start of a
+  			//vertical line?
+  
+  //if the width isn't odd, return nothing
+  if (width % 2 == 0 || width < 3 || height < 2) {
+	return result;
+  }
+
+  verticalLinePlace = ((width - 1)/2 + 1); // middle of the top (odd) row
+
+  // prints the horizontal line of T
+  for (int i = 0; i < width; i++) {
+	result += "*";
+  }
+  result += "\n"; // jumps the printing to the new line
+
+  //prints the vertical part of T
+  for (int i = 1; i < height; i++) {
+  	for (int j = 0; j < width; j++) {
+		if (j == verticalLinePlace - 1) {
+			result += "*";
+	    	}else {
+			result += " ";
+		}
+	}
+	result += "\n";
+  }
+
   return result;
 }
 
@@ -80,15 +110,22 @@ int main(int argc, char *argv[])
 
   // TODO: Add check for parameters
   // and code to print usage message
-
+  if (argc != 3) {
+	  cerr << "Usage: " << argv[0] << " width height\n";
+	  exit(1);
+  }
+  
   // TODO: Add code to get width and height from command line args
   // code that checks if they are both -1; if so, call runTests()
   // then exit.
-
-  runTests();
+  int width = stoi(argv[1]);
+  int height = stoi(argv[2]);
+  if (width == -1 && height == -1) {
+  	runTests();
+   	exit(1);
+  }
 
   // TODO: Add code that calls the starT function and prints
   // the result on cout (without an extra newline)
-
   return 0;
 }
