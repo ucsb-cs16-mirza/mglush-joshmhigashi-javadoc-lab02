@@ -1,5 +1,9 @@
-// starC.cpp
-// A demonstration of ASCII Art printing C characters
+//Michael Glushchenko and Josh Higashi starC.cpp
+//modified 1.27.20
+//This program takes an input of width and height
+//and prints the letter C with int width stars across
+//the first and last row and int height stars in the
+//far left column
 
 #include <iostream>
 #include <cstdlib>
@@ -15,19 +19,27 @@ void runTests(void);
 string starC(int width, int height)
 {
   string result = "";
+  //if width is less than the minimum 2 and height
+  //is less than the minimum 3, return empty string
   if (width < 2 || height < 3) {
 	  return result;
   }
-  
+  // constructs C of width and height dimensions
   for (int i = 0; i < height; i++) {
+	  //prints top and bottom row of stars
 	  if (i == 0 || i == (height-1)){
 	  	for (int k = 0; k < width; k++) {
 			result += "*";
 		}
-		result += "\n";
+		result += "\n"; //creates new line
 	  }
+	  //prints left column of stars
 	  else {
-	  	result += "*\n";
+	  	result += "*";
+		for (int l = 0; l < width - 1; l++){
+			result += " ";
+		}
+		result += "\n";
 	  }
   }
 
@@ -90,6 +102,7 @@ void assertEquals(string expected, string actual, string message = "")
 
 int main(int argc, char *argv[])
 {
+  //If insufficient paramaters given, output error message
   if (argc != 3) {
   	cerr << "Usage: " << argv[0] << " width height\n";
 	exit(1);
@@ -97,11 +110,12 @@ int main(int argc, char *argv[])
   
   int width = stoi(argv[1]);
   int height = stoi(argv[2]);
+  //runs tests if width and height are both -1
   if (width == -1 && height == -1) {
   	runTests();
 	exit(1);
   }
- 
+  //Prints resulting C
   cout << starC(width, height);
   return 0;
 }
