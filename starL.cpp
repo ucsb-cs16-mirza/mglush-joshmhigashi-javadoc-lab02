@@ -1,5 +1,7 @@
 // starL.cpp   A demonstration of ASCII Art printing L characters
 // Compile using the command: g++ --std=c++11 starL.cpp -o starL
+// Michael Glushchenko and Josh Higashi
+// Last modified 1.27.20
 
 #include <iostream>
 #include <cstdlib>
